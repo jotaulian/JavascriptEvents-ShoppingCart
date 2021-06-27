@@ -1,0 +1,1 @@
+const listaCursos = document.querySelector('#lista-cursos');
