@@ -8,7 +8,11 @@ let articulosCarrito = [];
 loadEvents();
 
 function loadEvents(){
+    //Agregar curso seleccionado al carrito
     listaCursos.addEventListener('click', addToChart);
+
+    //Eliminar curso del carrito
+    carrito.addEventListener('click', eliminarCurso);
 }
 
 //====== Functions ======
@@ -16,19 +20,31 @@ function addToChart(e){
     e.preventDefault();
 
     if(e.target.classList.contains('agregar-carrito')){
-        const selectedClass = e.target.parentElement.parentElement;
-        readData(selectedClass);
+        const cursoSeleccionado = e.target.parentElement.parentElement;
+        readData(cursoSeleccionado);
     }
 }
 
+//Eliminar curso del carrito
+function eliminarCurso(e){
+    if(e.target.classList.contains('borrar-curso')){
+        const cursoID = e.target.getAttribute('data-id');
+
+        //Eliminar el curso del arreglo 'articulosCarrito' mediante el data-id:
+        articulosCarrito = articulosCarrito.filter(curso => curso.id !== cursoID);
+        carritoHTML();
+    }
+}
+
+
 //Reading data from HTML Document:
-function readData(selectedClass){
+function readData(cursoSeleccionado){
 
 const curso = {
-    imagen: selectedClass.querySelector('img').src,
-    titulo: selectedClass.querySelector('h4').textContent,
-    precio: selectedClass.querySelector('.precio span').textContent,
-    id: selectedClass.querySelector('a').getAttribute('data-id'),
+    imagen: cursoSeleccionado.querySelector('img').src,
+    titulo: cursoSeleccionado.querySelector('h4').textContent,
+    precio: cursoSeleccionado.querySelector('.precio span').textContent,
+    id: cursoSeleccionado.querySelector('a').getAttribute('data-id'),
     cantidad: 1
 }
 
