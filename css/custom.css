@@ -193,3 +193,11 @@ ul {
   margin-bottom: 10px;
   text-decoration: none;
 }
+
+.footer .autor {
+  text-align: center;
+}
+.footer .autor a {
+  text-decoration: none;
+  color: #741d51;
+}
