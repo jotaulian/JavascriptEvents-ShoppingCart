@@ -14,6 +14,12 @@ function loadEvents(){
     //Eliminar curso del carrito
     carrito.addEventListener('click', eliminarCurso);
 
+    // Muestra los cursos desde el localStorage:
+    document.addEventListener('DOMContentLoaded', () => {
+        articulosCarrito = JSON.parse( localStorage.getItem('carrito') ) || [];
+        carritoHTML();
+    })
+
     //Vaciar el carrito
     vaciarCarrito.addEventListener('click', () => {
         articulosCarrito = [] //Vaciamos el arreglo
@@ -90,7 +96,14 @@ articulosCarrito.forEach(producto => {
     <td><a href="#" class="borrar-curso" data-id="${id}">X</a></td>`;
     contenedorCarrito.appendChild(row);
 });
+
+    //Agregar el carrito de compras al storage:
+    sincronizarStorage();
 } 
+
+function sincronizarStorage(){
+    localStorage.setItem('carrito', JSON.stringify(articulosCarrito));
+}
 
 function limpiarCarrito(){
     while(contenedorCarrito.firstChild){
